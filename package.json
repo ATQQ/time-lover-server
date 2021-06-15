@@ -1,5 +1,5 @@
 {
-  "name": "node-server",
+  "name": "time-lover-server",
   "version": "1.0.1",
   "description": "",
   "main": "src/server.ts",
@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@cloudbase/node-sdk": "^2.5.2",
     "core-js": "^3.12.1",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
