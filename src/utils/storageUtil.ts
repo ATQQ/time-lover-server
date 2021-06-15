@@ -32,7 +32,6 @@ class LocalStorage {
         if (this.map.size === 0) {
             this.loop()
         }
-        // console.log('LocalStorage: set', key, value)
         this.map.set(key, { value, duration })
     }
 
@@ -54,7 +53,6 @@ class LocalStorage {
      * 获取键值
      */
     getItem(key: string) {
-        // console.log('LocalStorage: get', key)
         return this.map.get(key)
     }
 

@@ -1,33 +1,34 @@
+import { User } from '@/db/modal/index'
+import { expiredRedisKey, getRedisVal, setRedisValue } from '@/db/redisDb'
 import { encryption } from './stringUtil'
-import storage from './storageUtil'
-import { User } from '@/db/modal'
 /**
  * Token(身份令牌)工具类
  */
 class TokenUtil {
-
     /**
-     * 生成token
-     */
+       * 生成token
+       */
     createToken(user: User, timeout = 60 * 60 * 24) {
-        const { username } = user
-        const token = encryption([username, Date.now()].join())
-        storage.setItem(token, {
-            user,
-            updateDate: Date.now()
-        }, timeout)
+        const { phone, userId } = user
+        const token = encryption([phone, userId, Date.now()].join())
+        setRedisValue(token, JSON.stringify(user), timeout)
         return token
     }
 
     expiredToken(token: string) {
-        storage.expireItem(token)
+        expiredRedisKey(token)
     }
 
-    getUserInfo(token: string) {
-        return storage.getItem(token)?.value?.user
+    async getUserInfo(token: string): Promise<User> {
+        const v = await getRedisVal(token)
+        if (v) {
+            return JSON.parse(v)
+        }
+        return null
     }
 
     static instance: TokenUtil = null
+
     static getInstance() {
         if (!this.instance) {
             this.instance = new TokenUtil()

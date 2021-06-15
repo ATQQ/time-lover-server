@@ -1,10 +1,10 @@
-import { query } from '@/lib/dbConnect/mysql'
-import { User } from '@/db/modal'
-import { selectTableByModel } from '@/utils/sqlUtil'
+import { findDocument, insertDocument } from '@/lib/dbConnect/cloudbase'
+import { User } from './modal'
 
-export function selectUserByUsername(username: string): Promise<User[]> {
-    const { sql, params } = selectTableByModel('user', {
-        data: { username }
-    })
-    return query<User[]>(sql, ...params)
+export function queryUserList(query: User) {
+    return findDocument('user', query).then(res => res.data)
+}
+
+export function inserUser(user: User) {
+    return insertDocument('user', user)
 }
