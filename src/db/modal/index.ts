@@ -10,7 +10,7 @@ export interface Family {
     name?: string
 }
 
-export interface Reord {
+export interface Record {
     recordId?: string
     familyId?: string
     userId?: string

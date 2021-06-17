@@ -34,7 +34,8 @@ router.post('login', async (req, res) => {
         }
         await inserUser(user)
     }
-    const token = tokenUtil.createToken(user)
+    // 1个月有效
+    const token = tokenUtil.createToken(user, 60 * 60 * 24 * 30)
     expiredRedisKey(`code-${phone}`)
     res.success({
         token
