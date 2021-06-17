@@ -20,6 +20,8 @@ router.post(':familyId', async (req, res) => {
     res.success({
         recordId
     })
+},{
+    needLogin:true
 })
 
 router.get(':familyId',async(req,res)=>{
@@ -36,6 +38,8 @@ router.get(':familyId',async(req,res)=>{
     res.success({
         records
     })
+},{
+    needLogin:true
 })
 
 router.delete(':recordId',async (req,res)=>{
@@ -46,6 +50,8 @@ router.delete(':recordId',async (req,res)=>{
         userId
     })
     res.success()
+},{
+    needLogin:true
 })
 
 export default router

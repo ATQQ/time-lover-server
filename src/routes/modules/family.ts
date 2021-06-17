@@ -12,6 +12,8 @@ router.post('add', async (req, res) => {
         userId,
     })
     res.success()
+},{
+    needLogin:true
 })
 
 
@@ -27,5 +29,7 @@ router.get('/list', async (req, res) => {
     res.success({
         families
     })
+},{
+    needLogin:true
 })
 export default router
