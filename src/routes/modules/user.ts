@@ -12,13 +12,13 @@ const router = new Router('user')
 
 router.post('login', async (req, res) => {
     const { phone, code } = req.body
-
+    
     // 测试账号数据
     if (phone === '13245678910' && code === '1234') {
         const [user] = await queryUserList({
             phone
         })
-        const token = tokenUtil.createToken(user, 60 * 60 * 24 * 30)
+        const token = await tokenUtil.createToken(user, 60 * 60 * 24 * 30)
         res.success({
             token
         })
@@ -47,7 +47,7 @@ router.post('login', async (req, res) => {
         await inserUser(user)
     }
     // 1个月有效
-    const token = tokenUtil.createToken(user, 60 * 60 * 24 * 30)
+    const token = await tokenUtil.createToken(user, 60 * 60 * 24 * 30)
     expiredRedisKey(`code-${phone}`)
     res.success({
         token

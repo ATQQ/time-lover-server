@@ -9,10 +9,10 @@ class TokenUtil {
     /**
        * 生成token
        */
-    createToken(user: User, timeout = 60 * 60 * 24) {
+   async createToken(user: User, timeout = 60 * 60 * 24) {
         const { phone, userId } = user
         const token = encryption([phone, userId, Date.now()].join())
-        setRedisValue(token, JSON.stringify(user), timeout)
+        await setRedisValue(token, JSON.stringify(user), timeout)
         return token
     }
 
