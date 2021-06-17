@@ -1,8 +1,8 @@
 org: '1256505457'
-app: node-server-test
-stage: dev
+app: time-lover-server
+stage: prod
 component: koa
-name: koa-EhFm5bWyQ
+name: koa-5k9c_ZBVu
 inputs:
   src:
     src: ./
@@ -26,12 +26,12 @@ inputs:
     autoCreateDns: false
   isAutoCiDeploy: false
   functionConf:
-    eip: true
+    eip: false
     timeout: 10
-    memorySize: 128
+    memorySize: 256
     environment:
       variables:
-        NODE_ENV: test
+        NODE_ENV: production
   layers:
-    - name: '${output:${stage}:${app}:node-server-test-layer.name}'
-      version: '${output:${stage}:${app}:node-server-test-layer.version}'
+    - name: '${output:${stage}:${app}:time-lover-server-layer.name}'
+      version: '${output:${stage}:${app}:time-lover-server-layer.version}'

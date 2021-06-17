@@ -1,10 +1,10 @@
 org: '1256505457'
-app: node-server-test
-stage: dev
+app: time-lover-server
+stage: prod
 component: layer
-name: node-server-test-layer
+name: time-lover-server-layer
 inputs:
-  name: node-server-test-layer
+  name: time-lover-server-layer
   region: ap-chengdu
   src:
     src: ../node_modules
