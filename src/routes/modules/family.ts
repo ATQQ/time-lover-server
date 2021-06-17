@@ -1,5 +1,6 @@
 import { insertFamily, queryFamilies } from '@/db/familyDb'
 import Router from '@/lib/Router'
+import { getUniqueKey } from '@/utils/stringUtil'
 import { getUserInfo } from '@/utils/tokenUtil'
 
 const router = new Router('family')
@@ -7,11 +8,15 @@ const router = new Router('family')
 router.post('add', async (req, res) => {
     const { name } = req.body
     const { userId } = await getUserInfo(req)
+    const familyId = getUniqueKey()
     await insertFamily({
         name,
         userId,
+        familyId
     })
-    res.success()
+    res.success({
+        familyId
+    })
 },{
     needLogin:true
 })

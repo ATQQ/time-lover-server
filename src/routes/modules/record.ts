@@ -13,36 +13,37 @@ router.post(':familyId', async (req, res) => {
     await insertRecord({
         recordId,
         weight,
-        date:new Date(date),
+        date: new Date(date),
         familyId,
         userId
     })
     res.success({
         recordId
     })
-},{
-    needLogin:true
+}, {
+    needLogin: true
 })
 
-router.get(':familyId',async(req,res)=>{
-    const {familyId} = req.params
+router.get(':familyId', async (req, res) => {
+    const { familyId } = req.params
     const { userId } = await getUserInfo(req)
 
     const records = await queryRecords({
         familyId,
         userId
     })
-    records.forEach(r=>{
+    records.forEach(r => {
         r._id = undefined
     })
+    records.sort((a, b) => b.date - a.date)
     res.success({
         records
     })
-},{
-    needLogin:true
+}, {
+    needLogin: true
 })
 
-router.delete(':recordId',async (req,res)=>{
+router.delete(':recordId', async (req, res) => {
     const { recordId } = req.params
     const { userId } = await getUserInfo(req)
     await deleteRecord({
@@ -50,8 +51,8 @@ router.delete(':recordId',async (req,res)=>{
         userId
     })
     res.success()
-},{
-    needLogin:true
+}, {
+    needLogin: true
 })
 
 export default router
