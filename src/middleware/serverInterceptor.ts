@@ -4,7 +4,7 @@ const allowOrigins = ['https://lover.sugarat.top', 'http://lover.sugarat.top']
 
 const interceptor: Middleware = (req, res) => {
     const { method } = req
-    console.log(`构造函数:${req.method} - ${req.url}`)
+    // console.log(`构造函数:${req.method} - ${req.url}`)
 
     if (allowOrigins.includes(req.headers.origin)) {
         // 允许跨域
