@@ -41,8 +41,8 @@ export const qiniuConfig = {
 
 // 腾讯云
 export const txConfig = {
-    secretId: process.env.TENCENT_ACCESS_ID,
-    secretKey: process.env.TENCENT_SECRET_KEY,
+    secretId: process.env.secretId,
+    secretKey: process.env.secretKey,
     templateId: process.env.TENCENT_MESSAGE_TemplateID,
     smsSdkAppid: process.env.TENCENT_MESSAGE_SmsSdkAppid,
 }

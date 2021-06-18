@@ -5378,10 +5378,10 @@ table@^6.0.4:
     slice-ansi "^4.0.0"
     string-width "^4.2.0"
 
-tencentcloud-sdk-nodejs@^4.0.145:
-  version "4.0.145"
-  resolved "https://registry.nlark.com/tencentcloud-sdk-nodejs/download/tencentcloud-sdk-nodejs-4.0.145.tgz#c7fcbb626be6987a3123b05245fd5969bd53461c"
-  integrity sha1-x/y7YmvmmHoxI7BSRf1Zab1TRhw=
+tencentcloud-sdk-nodejs@^4.0.147:
+  version "4.0.147"
+  resolved "https://registry.nlark.com/tencentcloud-sdk-nodejs/download/tencentcloud-sdk-nodejs-4.0.147.tgz#4945891b1fd72bd3fcd9498ccc10ce12422f6586"
+  integrity sha1-SUWJGx/XK9P82UmMzBDOEkIvZYY=
   dependencies:
     babel-eslint "^10.0.2"
     eslint-plugin-react "^7.17.0"
