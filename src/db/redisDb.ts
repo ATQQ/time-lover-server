@@ -1,13 +1,13 @@
 import { getClient } from '@/lib/dbConnect/redis'
 
 // 做一层业务缓存
-import storage from '@/utils/storageUtil'
+// import storage from '@/utils/storageUtil'
 
 export function setRedisValue(k: string, v: string, expiredTime = -1) {
   return new Promise(resolve=>{
     getClient().then((client) => {
       client.set(k, v, () => {
-        storage.setItem(k, v, expiredTime)
+        // storage.setItem(k, v, expiredTime)
         resolve(undefined)
         if (expiredTime !== -1) {
           client.expire(k, expiredTime, () => {
@@ -23,14 +23,14 @@ export function setRedisValue(k: string, v: string, expiredTime = -1) {
 
 export function getRedisVal(k: string): Promise<string> {
   return new Promise((resolve) => {
-    const v = storage.getItem(k)
-    if (v?.value) {
-      resolve(v.value)
-      return
-    }
+    // const v = storage.getItem(k)
+    // if (v?.value) {
+    //   resolve(v.value)
+    //   return
+    // }
     getClient().then((client) => {
       client.get(k, (err, reply) => {
-        storage.setItem(k, reply, 60 * 60 * 24)
+        // storage.setItem(k, reply, 60 * 60 * 24)
         resolve(reply)
         client.quit()
       })
@@ -40,5 +40,5 @@ export function getRedisVal(k: string): Promise<string> {
 
 export function expiredRedisKey(k: string) {
   setRedisValue(k, '', 0)
-  storage.expireItem(k)
+  // storage.expireItem(k)
 }
