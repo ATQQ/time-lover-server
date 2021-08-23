@@ -1,4 +1,4 @@
-import { Middleware } from '@/lib/server/types'
+import { Middleware } from 'flash-wolves'
 // 允许跨域访问的源
 const allowOrigins = ['https://lover.sugarat.top', 'http://lover.sugarat.top']
 

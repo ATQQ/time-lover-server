@@ -1,7 +1,7 @@
 import { GlobalError, UserError } from '@/constants/errorMsg'
 import { expiredRedisKey, getRedisVal, setRedisValue } from '@/db/redisDb'
 import { inserUser, queryUserList } from '@/db/userDb'
-import Router from '@/lib/Router'
+import { Router } from 'flash-wolves'
 import { randomNumStr } from '@/utils/randUtil'
 import { rMobilePhone, rVerCode } from '@/utils/regExp'
 import { getUniqueKey } from '@/utils/stringUtil'
@@ -46,8 +46,8 @@ router.post('login', async (req, res) => {
         }
         await inserUser(user)
     }
-    // 1个月有效
-    const token = await tokenUtil.createToken(user, 60 * 60 * 24 * 30)
+    // 12个月有效
+    const token = await tokenUtil.createToken(user, 60 * 60 * 24 * 30 * 12)
     expiredRedisKey(`code-${phone}`)
     res.success({
         token

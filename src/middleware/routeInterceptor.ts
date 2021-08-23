@@ -1,5 +1,5 @@
 import { GlobalError } from '@/constants/errorMsg'
-import { Middleware } from '@/lib/server/types'
+import { Middleware } from 'flash-wolves'
 import { getUserInfo } from '@/utils/tokenUtil'
 
 const interceptor: Middleware = async (req, res) => {

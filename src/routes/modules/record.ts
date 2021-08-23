@@ -1,5 +1,5 @@
 import { deleteRecord, insertRecord, queryRecords } from '@/db/recordDb'
-import Router from '@/lib/Router'
+import { Router } from 'flash-wolves'
 import { getUniqueKey } from '@/utils/stringUtil'
 import { getUserInfo } from '@/utils/tokenUtil'
 
