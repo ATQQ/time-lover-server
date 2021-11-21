@@ -24,7 +24,10 @@ import routes from './routes'
 import { serverInterceptor, routeInterceptor } from './middleware'
 
 const app = new Fw(serverInterceptor, {
-    beforeRunRoute: routeInterceptor
+    beforeRunRoute: routeInterceptor,
+    catchRuntimeError(req,res,err){
+        console.log(err)
+    }
 })
 
 // 注册路由

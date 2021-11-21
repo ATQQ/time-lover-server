@@ -54,7 +54,7 @@ router.post('login', async (req, res) => {
     })
 })
 
-router.get('code', (req, res) => {
+router.get('code',async (req, res) => {
     const { phone } = req.query
     // 参数格式不正确
     if (!rMobilePhone.test(phone)) {
@@ -64,7 +64,7 @@ router.get('code', (req, res) => {
     const code = randomNumStr(4)
     if (process.env.NODE_ENV !== 'development') {
         //  发送验证码
-        sendMessage(phone, code, 2)
+        await sendMessage(phone, code, 2)
     }
     setRedisValue(`code-${phone}`, code, 120)
     console.log(code)
