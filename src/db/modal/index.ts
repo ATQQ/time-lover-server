@@ -16,4 +16,5 @@ export interface Record {
     userId?: string
     weight?: number
     date?: Date
+    tips?: string
 }
