@@ -7,7 +7,7 @@ const router = new Router('record')
 
 router.post(':familyId', async (req, res) => {
     const { familyId } = req.params
-    const { weight, date,tips } = req.body
+    const { weight, date, tips } = req.body
     const { userId } = await getUserInfo(req)
     const recordId = getUniqueKey()
     await insertRecord({
@@ -16,7 +16,7 @@ router.post(':familyId', async (req, res) => {
         date: new Date(date),
         familyId,
         userId,
-        tips:tips||''
+        tips: tips || ''
     })
     res.success({
         recordId

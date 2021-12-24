@@ -15,9 +15,10 @@ export function deleteDocument(collection: string, query: any) {
 }
 
 export function findDocument(collection: string, query: any) {
-    return db.collection(collection).where(query).get()
+    // TODO: 抽空做成分页
+    return db.collection(collection).where(query).limit(1000).get()
 }
 
-export function updateDocument<T>(collection: string, query: any, data:T) {
+export function updateDocument<T>(collection: string, query: any, data: T) {
     return db.collection(collection).where(query).update(data)
 }

@@ -12,7 +12,7 @@ const router = new Router('user')
 
 router.post('login', async (req, res) => {
     const { phone, code } = req.body
-    
+
     // 测试账号数据
     if (phone === '13245678910' && code === '1234') {
         const [user] = await queryUserList({
@@ -54,7 +54,7 @@ router.post('login', async (req, res) => {
     })
 })
 
-router.get('code',async (req, res) => {
+router.get('code', async (req, res) => {
     const { phone } = req.query
     // 参数格式不正确
     if (!rMobilePhone.test(phone)) {
