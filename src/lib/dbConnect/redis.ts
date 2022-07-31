@@ -7,9 +7,7 @@ const isDEV = process.env.NODE_ENV === 'development'
 
 export function getClient(): Promise<RedisClient> {
   return new Promise<RedisClient>((res, rej) => {
-    const client = redis.createClient(port, host, !isDEV ? {
-      password,
-    } : {})
+    const client = redis.createClient(port, host)
     res(client)
 
     client.on('error', (err) => {

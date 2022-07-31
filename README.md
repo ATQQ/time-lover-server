@@ -24,19 +24,19 @@
 
 1. 安装相关依赖
 ```sh
-yarn install
+pnpm install
 ```
 
 2. 启动项目
 ```sh
 # -------prod--------
-npm run start
+pnpm run start
 # or
-yarn start
+pnpm start
 
 # -------dev--------
-npm run dev
+pnpm run dev
 # or
-yarn dev
+pnpm dev
 ```
 
