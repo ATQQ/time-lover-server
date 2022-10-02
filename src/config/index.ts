@@ -22,8 +22,9 @@ export const mongodbConfig = {
     port: +process.env.MONGO_DB_PORT,
     database: process.env.MONGO_DB_NAME,
     user: process.env.MONGO_DB_USER,
-    password: process.env.MONGO_DB_PWD
-}
+    password: process.env.MONGO_DB_PWD,
+    auth: String(true) === process.env.MONGO_DB_NEED_AUTH
+  }
 
 export const redisConfig = {
     host: process.env.REDIS_DB_HOST,
