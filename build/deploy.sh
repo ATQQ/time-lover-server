@@ -1,7 +1,7 @@
 # /bin/bash
 compressFile="lover-server.tar.gz"        # 压缩后的文件名
 user="root"                         # 远程登录用户
-origin="sugarat.top"                   # 远程登录origin
+origin="lover.sugarat.top"                   # 远程登录origin
 targetDir="/www/wwwroot/lover.sugarat.top/server"     # 目标目录
 
 echo "开始-----上传"

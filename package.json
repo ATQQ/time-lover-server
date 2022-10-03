@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "lint": "eslint --fix ./src",
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "start:ts": "esno src/index.ts",
     "dev": "run-p build:watch dev:server",
     "dev:server": "nodemon dist/server.js",
