@@ -10,5 +10,5 @@ import record from './modules/record'
 const routers = [user, family, record]
 
 export default routers.reduce((pre: Route[], router) => {
-    return pre.concat(router.getRoutes())
+  return pre.concat(router.getRoutes())
 }, [])

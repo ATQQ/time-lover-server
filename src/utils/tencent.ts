@@ -1,6 +1,6 @@
 import * as tencentcloud from 'tencentcloud-sdk-nodejs'
-import { txConfig } from '@/config'
 import { SendSmsRequest } from 'tencentcloud-sdk-nodejs/tencentcloud/services/sms/v20210111/sms_models'
+import { txConfig } from '@/config'
 // [文档地址](https://cloud.tencent.com/document/product/382/43197)
 
 export function sendMessage(phone, code, time = 2) {
@@ -9,25 +9,21 @@ export function sendMessage(phone, code, time = 2) {
   const clientConfig = {
     credential: {
       secretId: txConfig.secretId,
-      secretKey: txConfig.secretKey,
+      secretKey: txConfig.secretKey
     },
     region: 'ap-guangzhou',
-    profile: {
-
-    }
+    profile: {}
   }
   console.log(clientConfig)
 
   const client = new SmsClient(clientConfig)
   const args = [code, `${time}`]
   const params: SendSmsRequest = {
-    PhoneNumberSet: [
-      `+86${phone}`,
-    ],
+    PhoneNumberSet: [`+86${phone}`],
     TemplateParamSet: args,
     TemplateId: txConfig.templateId,
     SmsSdkAppId: txConfig.smsSdkAppid,
-    SignName: '粥里有勺糖',
+    SignName: '粥里有勺糖'
   }
   console.log('---------send request-------')
   console.log(params)

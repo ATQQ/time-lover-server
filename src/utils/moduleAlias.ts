@@ -5,6 +5,6 @@ import moduleAlias from 'module-alias'
 
 export default function loadModuleAlias() {
   moduleAlias.addAliases({
-    '@': `${__dirname}/../`,
+    '@': `${__dirname}/../`
   })
 }

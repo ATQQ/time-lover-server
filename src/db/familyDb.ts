@@ -1,10 +1,11 @@
-import { findDocument, insertDocument } from '@/lib/dbConnect/cloudbase'
+import { FilterQuery } from 'mongodb'
+import { findCollection, insertCollection } from '@/lib/dbConnect/mongodb'
 import { Family } from './modal'
 
-export function queryFamilies(query: Family) {
-    return findDocument('family', query).then(res => res.data)
+export function queryFamilies(query: FilterQuery<Family>) {
+  return findCollection<Family>('family', query)
 }
 
 export function insertFamily(family: Family) {
-    return insertDocument('family', family)
+  return insertCollection('family', family)
 }
