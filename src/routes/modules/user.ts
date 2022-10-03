@@ -1,6 +1,6 @@
 import { GlobalError, UserError } from '@/constants/errorMsg'
 import { expiredRedisKey, getRedisVal, setRedisValue } from '@/db/redisDb'
-import { inserUser, queryUserList } from '@/db/userDb'
+import { insertUser, queryUserList } from '@/db/userDb'
 import { Router } from 'flash-wolves'
 import { randomNumStr } from '@/utils/randUtil'
 import { rMobilePhone, rVerCode } from '@/utils/regExp'
@@ -15,9 +15,17 @@ router.post('login', async (req, res) => {
 
     // 测试账号数据
     if (phone === '13245678910' && code === '1234') {
-        const [user] = await queryUserList({
+        let [user] = await queryUserList({
             phone
         })
+        if (!user) {
+            user = {
+                userId: getUniqueKey(),
+                phone,
+                joinTime: new Date()
+            }
+            await insertUser(user)
+        }
         const token = await tokenUtil.createToken(user, 60 * 60 * 24 * 30)
         res.success({
             token
@@ -44,7 +52,7 @@ router.post('login', async (req, res) => {
             phone,
             joinTime: new Date()
         }
-        await inserUser(user)
+        await insertUser(user)
     }
     // 12个月有效
     const token = await tokenUtil.createToken(user, 60 * 60 * 24 * 30 * 12)

@@ -29,7 +29,7 @@ router.get('/list', async (req, res) => {
     })
     // 移除_id
     families.forEach(f => {
-        f._id = undefined
+        delete f['_id']
     })
     res.success({
         families

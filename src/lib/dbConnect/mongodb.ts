@@ -14,7 +14,6 @@ const { host, port, user, password, database, auth } = mongodbConfig
 const url = auth
 ? `mongodb://${user}:${password}@${host}:${port}/${database}`
 : `mongodb://${host}:${port}/${database}?wtimeoutMS=2000`
-console.log(url)
 
 interface Res {
   db: MongoClient

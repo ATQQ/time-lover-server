@@ -34,9 +34,9 @@ router.get(':familyId', async (req, res) => {
         userId
     })
     records.forEach(r => {
-        r._id = undefined
+        delete r['_id']
     })
-    records.sort((a, b) => b.date - a.date)
+    records.sort((a, b) => +b.date - +a.date)
     res.success({
         records
     })
