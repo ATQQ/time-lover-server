@@ -12,8 +12,8 @@ import { mongodbConfig } from '@/config'
 const { host, port, user, password, database, auth } = mongodbConfig
 
 const url = auth
-? `mongodb://${user}:${password}@${host}:${port}/${database}`
-: `mongodb://${host}:${port}/${database}?wtimeoutMS=2000`
+  ? `mongodb://${user}:${password}@${host}:${port}/${database}`
+  : `mongodb://${host}:${port}/${database}?wtimeoutMS=2000`
 
 interface Res {
   db: MongoClient

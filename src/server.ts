@@ -5,10 +5,10 @@ import routes from './routes'
 import { serverInterceptor, routeInterceptor } from './middleware'
 
 const app = new App(serverInterceptor, {
-    beforeRunRoute: routeInterceptor,
-    catchRuntimeError(req,res,err){
-        console.log(err)
-    }
+  beforeRunRoute: routeInterceptor,
+  catchRuntimeError(req, res, err) {
+    console.log(err)
+  }
 })
 
 // 注册路由
