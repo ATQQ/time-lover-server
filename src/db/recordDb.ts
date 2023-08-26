@@ -1,12 +1,12 @@
-import { FilterQuery } from 'mongodb'
+import type { Filter } from 'mongodb'
+import type { Record } from './modal'
 import {
   findCollection,
   insertCollection,
-  updateCollection
+  updateCollection,
 } from '@/lib/dbConnect/mongodb'
-import { Record } from './modal'
 
-export function queryRecords(query: FilterQuery<Record>) {
+export function queryRecords(query: Filter<Record>) {
   return findCollection<Record>('record', query)
 }
 
@@ -14,10 +14,10 @@ export function insertRecord(record: Record) {
   return insertCollection('record', record)
 }
 
-export function deleteRecord(record: FilterQuery<Record>) {
+export function deleteRecord(record: Filter<Record>) {
   return updateCollection<Record>('record', record, {
     $set: {
-      userId: 'trash'
-    }
+      userId: 'trash',
+    },
   })
 }

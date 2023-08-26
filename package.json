@@ -2,6 +2,9 @@
   "name": "time-lover-server",
   "version": "1.0.1",
   "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "main": "src/server.ts",
   "scripts": {
     "start": "node dist/server.js",
@@ -16,9 +19,6 @@
     "test": "vitest",
     "lint": "eslint --fix ./src --ext .ts,.d.ts,.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "core-js": "^3.32.1",
     "cross-env": "^7.0.3",

@@ -1,4 +1,4 @@
-import { Middleware } from 'flash-wolves'
+import type { Middleware } from 'flash-wolves'
 import { GlobalError } from '@/constants/errorMsg'
 import { getUserInfo } from '@/utils/tokenUtil'
 
@@ -8,6 +8,7 @@ const interceptor: Middleware = async (req, res) => {
     if (!user) {
       res.failWithError(GlobalError.powerError)
     }
+    req.userInfo = user
   }
 }
 export default interceptor

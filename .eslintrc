@@ -6,6 +6,8 @@
   "rules": {
     "no-console": "off",
     "todo-ddl/diy": "warn",
-    "curly": "off"
+    "curly": "off",
+    "promise/param-names": "off",
+    "@typescript-eslint/comma-dangle": "off"
   }
 }

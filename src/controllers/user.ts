@@ -24,6 +24,7 @@ export class UserController {
       let [user] = await this.userService.findUserListByPhone(phone)
       if (!user) {
         user = {
+          ...user,
           userId: getUniqueKey(),
           phone,
           joinTime: new Date(),
@@ -47,6 +48,7 @@ export class UserController {
     // 不存在就插入
     if (!user) {
       user = {
+        ...user,
         userId: getUniqueKey(),
         phone,
         joinTime: new Date(),
