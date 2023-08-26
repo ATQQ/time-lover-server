@@ -1,4 +1,3 @@
-import process from 'node:process'
 import type { Context } from 'flash-wolves'
 import { Get, Inject, InjectCtx, Post, ReqBody, ReqQuery, Response, RouterController } from 'flash-wolves'
 import { UserService } from '@/service'

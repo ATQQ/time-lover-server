@@ -29,8 +29,9 @@ export class RecordService {
     })
     records.forEach((r) => {
       delete r._id
+      delete r.userId
     })
-    records.sort((a, b) => +b.date - +a.date)
+    records.sort((a, b) => +new Date(b.date) - +new Date(a.date))
     return records
   }
 

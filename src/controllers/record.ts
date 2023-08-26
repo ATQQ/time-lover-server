@@ -16,7 +16,6 @@ export class recordController {
   @Get(':familyId')
   async getRecords(@ReqParams('familyId') familyId) {
     const records = await this.recordService.getRecords(familyId)
-    records.sort((a, b) => +new Date(b.date) - +new Date(a.date))
     return { records }
   }
 
