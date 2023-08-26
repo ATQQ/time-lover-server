@@ -18,15 +18,15 @@ router.post(
       date: new Date(date),
       familyId,
       userId,
-      tips: tips || ''
+      tips: tips || '',
     })
     res.success({
-      recordId
+      recordId,
     })
   },
   {
-    needLogin: true
-  }
+    needLogin: true,
+  },
 )
 
 router.get(
@@ -37,19 +37,19 @@ router.get(
 
     const records = await queryRecords({
       familyId,
-      userId
+      userId,
     })
     records.forEach((r) => {
       delete r._id
     })
     records.sort((a, b) => +b.date - +a.date)
     res.success({
-      records
+      records,
     })
   },
   {
-    needLogin: true
-  }
+    needLogin: true,
+  },
 )
 
 router.delete(
@@ -59,13 +59,13 @@ router.delete(
     const { userId } = await getUserInfo(req)
     await deleteRecord({
       recordId,
-      userId
+      userId,
     })
     res.success()
   },
   {
-    needLogin: true
-  }
+    needLogin: true,
+  },
 )
 
 export default router

@@ -1,0 +1,11 @@
+{
+  "extends": "@antfu",
+  "plugins": [
+    "todo-ddl"
+  ],
+  "rules": {
+    "no-console": "off",
+    "todo-ddl/diy": "warn",
+    "curly": "off"
+  }
+}
