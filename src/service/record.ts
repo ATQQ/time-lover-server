@@ -1,6 +1,6 @@
 import type { Context } from 'flash-wolves'
 import { InjectCtx, Provide } from 'flash-wolves'
-import { deleteRecord, insertRecord, queryRecords } from '@/db/recordDb'
+import { deleteRecord, findRecordCount, insertRecord, queryRecords } from '@/db/recordDb'
 import { getUniqueKey } from '@/utils/stringUtil'
 
 @Provide()
@@ -31,6 +31,17 @@ export class RecordService {
     })
     records.sort((a, b) => +b.date - +a.date)
     return records
+  }
+
+  async getRecordsCount(familyId: string) {
+    return await findRecordCount({
+      familyId,
+      $nor: [
+        {
+          userId: 'trash'
+        }
+      ]
+    })
   }
 
   async deleteRecord(recordId: string) {

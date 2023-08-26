@@ -1,12 +1,16 @@
 import type { Context } from 'flash-wolves'
-import { InjectCtx, Provide } from 'flash-wolves'
-import { insertFamily, queryFamilies, updateFamily } from '@/db/familyDb'
+import { Inject, InjectCtx, Provide } from 'flash-wolves'
+import { RecordService } from './record'
+import { deleteFamily, insertFamily, queryFamilies, updateFamily } from '@/db/familyDb'
 import { getUniqueKey } from '@/utils/stringUtil'
 
 @Provide()
 export class FamilyService {
   @InjectCtx()
   private ctx: Context
+
+  @Inject(RecordService)
+  private recordService: RecordService
 
   async addFamily(name: string) {
     const { userId } = this.ctx.req.userInfo
@@ -61,5 +65,20 @@ export class FamilyService {
     }, {
       name
     })
+  }
+
+  async deleteFamily(id: string) {
+    // 先获取数据
+    const recordsCount = await this.recordService.getRecordsCount(id)
+    console.log(await this.recordService.getRecords(id))
+    if (recordsCount > 0) {
+      return false
+    }
+
+    await deleteFamily({
+      userId: this.ctx.req.userInfo.userId,
+      familyId: id
+    })
+    return true
   }
 }

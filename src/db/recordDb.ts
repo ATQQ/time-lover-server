@@ -2,6 +2,7 @@ import type { Filter } from 'mongodb'
 import type { Record } from './modal'
 import {
   findCollection,
+  findCollectionCount,
   insertCollection,
   updateCollection,
 } from '@/lib/dbConnect/mongodb'
@@ -20,4 +21,8 @@ export function deleteRecord(record: Filter<Record>) {
       userId: 'trash',
     },
   })
+}
+
+export function findRecordCount(query: Filter<Record>) {
+  return findCollectionCount('record', query)
 }

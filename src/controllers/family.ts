@@ -1,4 +1,4 @@
-import { Get, Inject, Post, Put, ReqBody, ReqParams, Response, RouterController } from 'flash-wolves'
+import { Delete, Get, Inject, Post, Put, ReqBody, ReqParams, Response, RouterController } from 'flash-wolves'
 import { FamilyService } from '@/service'
 import { GlobalError } from '@/constants/errorMsg'
 
@@ -24,5 +24,15 @@ export class FamilyController {
     }
 
     return await this.familyService.updateFamilyName(name, id)
+  }
+
+  @Delete('delete/:id')
+  async deleteFamily(@ReqParams('id') id: string) {
+    // TODO 统一的参数校验支持
+    if (!id) {
+      return Response.failWithError(GlobalError.paramsError)
+    }
+
+    return await this.familyService.deleteFamily(id)
   }
 }
