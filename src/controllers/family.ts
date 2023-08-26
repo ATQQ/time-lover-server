@@ -1,12 +1,9 @@
-import type { Context } from 'flash-wolves'
-import { Get, Inject, InjectCtx, Post, ReqBody, RouterController } from 'flash-wolves'
+import { Get, Inject, Post, Put, ReqBody, ReqParams, Response, RouterController } from 'flash-wolves'
 import { FamilyService } from '@/service'
+import { GlobalError } from '@/constants/errorMsg'
 
 @RouterController('family', { needLogin: true })
 export class FamilyController {
-  @InjectCtx()
-  private ctx: Context
-
   @Inject(FamilyService)
   private familyService: FamilyService
 
@@ -18,5 +15,14 @@ export class FamilyController {
   @Get('list')
   async getFamilyList() {
     return await this.familyService.getFamilyList()
+  }
+
+  @Put('update/:id')
+  async updateFamily(@ReqBody('name') name: string, @ReqParams('id') id: string) {
+    if (!name || !id) {
+      return Response.failWithError(GlobalError.paramsError)
+    }
+
+    return await this.familyService.updateFamilyName(name, id)
   }
 }
