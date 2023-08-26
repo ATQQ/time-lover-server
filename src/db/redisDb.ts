@@ -11,7 +11,7 @@ export async function setRedisValue(k: string, v: string, expiredTime = -1) {
 
 export async function getRedisVal(k: string) {
   const client = await getClient()
-  const value = client.get(k);
+  const value = client.get(k)
   await client.quit()
   return value
 }

@@ -1,7 +1,7 @@
 // import { findDocument, insertDocument } from '@/lib/dbConnect/cloudbase'
-import { Filter } from 'mongodb'
-import { insertCollection, findCollection } from '@/lib/dbConnect/mongodb'
-import { User } from './modal'
+import type { Filter } from 'mongodb'
+import type { User } from './modal'
+import { findCollection, insertCollection } from '@/lib/dbConnect/mongodb'
 
 export function queryUserList(query: Filter<User>) {
   return findCollection<User>('user', query)

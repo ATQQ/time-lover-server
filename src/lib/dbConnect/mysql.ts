@@ -1,5 +1,6 @@
 import mysql from 'mysql'
 import { mysqlConfig } from '@/config'
+
 // 创建连接池
 const pool = mysql.createPool(mysqlConfig)
 

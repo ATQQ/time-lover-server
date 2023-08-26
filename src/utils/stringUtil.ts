@@ -1,6 +1,7 @@
-import crypto from 'crypto'
+import crypto from 'node:crypto'
+import path from 'node:path'
 import { ObjectId } from 'mongodb'
-import path from 'path'
+
 /**
  * 加密字符串(md5+base64)
  * @param str 待加密的字符串
@@ -38,7 +39,7 @@ export function formatDate(d: Date, fmt = 'yyyy-MM-dd hh:mm:ss') {
     'm+': d.getMinutes(), // 分
     's+': d.getSeconds(), // 秒
     'q+': Math.floor((d.getMonth() + 3) / 3), // 季度
-    S: d.getMilliseconds() // 毫秒
+    'S': d.getMilliseconds() // 毫秒
   }
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(
@@ -46,7 +47,7 @@ export function formatDate(d: Date, fmt = 'yyyy-MM-dd hh:mm:ss') {
       `${d.getFullYear()}`.substr(4 - RegExp.$1.length)
     )
   }
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const k in o) {
     if (new RegExp(`(${k})`).test(fmt))
       fmt = fmt.replace(
