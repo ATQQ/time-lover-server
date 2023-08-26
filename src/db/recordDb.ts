@@ -1,4 +1,4 @@
-import type { Filter } from 'mongodb'
+import type { Filter, UpdateFilter } from 'mongodb'
 import type { Record } from './modal'
 import {
   findCollection,
@@ -32,4 +32,10 @@ export function deleteRecord(record: Filter<Record>) {
 
 export function findRecordCount(query: Filter<Record>) {
   return findCollectionCount('record', query)
+}
+
+export function updateRecord(record: Filter<Record>, update: Record) {
+  return updateCollection('record', record, {
+    $set: update,
+  })
 }

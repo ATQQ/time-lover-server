@@ -1,7 +1,8 @@
 import type { Context } from 'flash-wolves'
 import { InjectCtx, Provide } from 'flash-wolves'
-import { deleteRecord, findRecordCount, insertRecord, queryRecords } from '@/db/recordDb'
+import { deleteRecord, findRecordCount, insertRecord, queryRecords, updateRecord } from '@/db/recordDb'
 import { getUniqueKey } from '@/utils/stringUtil'
+import type { Record } from '@/db/modal'
 
 @Provide()
 export class RecordService {
@@ -49,5 +50,11 @@ export class RecordService {
       recordId,
       userId: this.ctx.req.userInfo.userId,
     })
+  }
+
+  async updateRecord(record: Partial<Record>, recordId: string) {
+    return await updateRecord({
+      recordId
+    }, record)
   }
 }

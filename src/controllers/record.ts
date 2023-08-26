@@ -1,4 +1,4 @@
-import { Delete, Get, Inject, Post, ReqBody, ReqParams, RouterController } from 'flash-wolves'
+import { Delete, Get, Inject, Post, Put, ReqBody, ReqParams, RouterController } from 'flash-wolves'
 import { RecordService } from '@/service'
 
 @RouterController('record', { needLogin: true })
@@ -16,11 +16,18 @@ export class recordController {
   @Get(':familyId')
   async getRecords(@ReqParams('familyId') familyId) {
     const records = await this.recordService.getRecords(familyId)
+    records.sort((a, b) => +new Date(b.date) - +new Date(a.date))
     return { records }
   }
 
   @Delete(':recordId')
   async deleteRecord(@ReqParams('recordId') recordId) {
     await this.recordService.deleteRecord(recordId)
+  }
+
+  @Put(':recordId')
+  async updateRecord(@ReqBody() body: any, @ReqParams('recordId') recordId) {
+    const { weight, date, tips } = body
+    await this.recordService.updateRecord({ weight, date, tips }, recordId)
   }
 }
