@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES6",
     "lib": ["ESNext"],
     "module": "commonjs",
     "moduleResolution": "node",
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators":true,
     "esModuleInterop": true,
     "allowJs": true,
     "baseUrl": ".",

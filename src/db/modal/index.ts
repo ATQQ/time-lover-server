@@ -8,6 +8,7 @@ export interface Family {
   familyId?: string
   userId?: string
   name?: string
+  deleted?: boolean
 }
 
 export interface Record {
@@ -17,4 +18,5 @@ export interface Record {
   weight?: number
   date?: Date
   tips?: string
+  deleted?: boolean
 }

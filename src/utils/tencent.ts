@@ -1,6 +1,7 @@
 import * as tencentcloud from 'tencentcloud-sdk-nodejs'
-import { SendSmsRequest } from 'tencentcloud-sdk-nodejs/tencentcloud/services/sms/v20210111/sms_models'
+import type { SendSmsRequest } from 'tencentcloud-sdk-nodejs/tencentcloud/services/sms/v20210111/sms_models'
 import { txConfig } from '@/config'
+
 // [文档地址](https://cloud.tencent.com/document/product/382/43197)
 
 export function sendMessage(phone, code, time = 2) {
@@ -28,7 +29,7 @@ export function sendMessage(phone, code, time = 2) {
   console.log('---------send request-------')
   console.log(params)
   return new Promise((res, rej) => {
-    client.SendSms(params, function (err, response) {
+    client.SendSms(params, (err, response) => {
       // 请求异常返回，打印异常信息
       if (err) {
         console.log('---------request error-------')

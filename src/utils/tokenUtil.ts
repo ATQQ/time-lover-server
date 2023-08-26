@@ -1,7 +1,8 @@
-import { FWRequest } from 'flash-wolves'
-import { User } from '@/db/modal/index'
-import { expiredRedisKey, getRedisVal, setRedisValue } from '@/db/redisDb'
+import type { FWRequest } from 'flash-wolves'
 import { encryption } from './stringUtil'
+import type { User } from '@/db/modal/index'
+import { expiredRedisKey, getRedisVal, setRedisValue } from '@/db/redisDb'
+
 /**
  * Token(身份令牌)工具类
  */
@@ -42,7 +43,7 @@ export default TokenUtil.getInstance()
 
 export async function getUserInfo(req: FWRequest) {
   const user = await TokenUtil.getInstance().getUserInfo(
-    req.headers.token as string
+    req.headers.token as string,
   )
   return user
 }

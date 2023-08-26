@@ -1,11 +1,15 @@
-import {
+import type {
   Db,
-  FilterQuery,
-  InsertOneWriteOpResult,
-  MongoClient,
-  UpdateQuery,
-  UpdateWriteOpResult,
+  Filter,
+  InsertManyResult,
+  InsertOneResult,
+  UpdateFilter,
+  UpdateResult,
   WithId
+} from 'mongodb'
+import {
+  MongoClient
+
 } from 'mongodb'
 import { mongodbConfig } from '@/config'
 
@@ -22,14 +26,11 @@ interface Res {
 
 export function getDBConnection(): Promise<Res> {
   return new Promise((res, rej) => {
-    MongoClient.connect(url, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true
-    })
+    MongoClient.connect(url)
       .then((db) => {
         res({
           db,
-          Db: db.db(database)
+          Db: db.db(database),
         })
       })
       .catch((err) => {
@@ -49,7 +50,7 @@ export function query<T>(callback: Callback<T>): Promise<T> {
       // 执行回调
       callback(Db, resolve)
       // resolve后关闭
-      p.catch((e) => rej(e)).finally(() => {
+      p.catch(e => rej(e)).finally(() => {
         db.close()
       })
     })
@@ -60,11 +61,11 @@ export function query<T>(callback: Callback<T>): Promise<T> {
 export const mongoDbQuery = query
 export function updateCollection<T>(
   collection: string,
-  query: FilterQuery<T>,
-  data: UpdateQuery<T>,
-  many = false
+  query: Filter<T>,
+  data: UpdateFilter<T>,
+  many = false,
 ) {
-  return mongoDbQuery<UpdateWriteOpResult>((db, resolve) => {
+  return mongoDbQuery<UpdateResult>((db, resolve) => {
     if (many) {
       db.collection<T>(collection).updateMany(query, data).then(resolve)
       return
@@ -76,9 +77,9 @@ export function updateCollection<T>(
 export function insertCollection<T>(
   collection: string,
   data: T[] | T,
-  many = false
+  many = false,
 ) {
-  return mongoDbQuery<InsertOneWriteOpResult<WithId<T>>>((db, resolve) => {
+  return mongoDbQuery<InsertOneResult | InsertManyResult<WithId<T>>>((db, resolve) => {
     if (many && Array.isArray(data)) {
       db.collection<T>(collection)
         .insertMany(data as any)
@@ -92,9 +93,9 @@ export function insertCollection<T>(
 }
 export function findCollection<T>(
   collection: string,
-  query: FilterQuery<T>
-): Promise<T[]> {
-  return mongoDbQuery<T[]>((db, resolve) => {
+  query: Filter<T>,
+) {
+  return mongoDbQuery<WithId<T>[]>((db, resolve) => {
     db.collection<T>(collection)
       .find(query)
       .toArray()
@@ -106,7 +107,7 @@ export function findCollection<T>(
 
 export function findCollectionCount<T>(
   collection: string,
-  query: FilterQuery<T>
+  query: Filter<T>,
 ): Promise<number> {
   return mongoDbQuery<number>((db, resolve) => {
     db.collection<T>(collection)

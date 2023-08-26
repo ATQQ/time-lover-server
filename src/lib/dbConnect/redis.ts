@@ -1,18 +1,11 @@
-import redis, { RedisClient } from 'redis'
-import { redisConfig } from '@/config'
+import { createClient } from 'redis'
 
-const { port, host, password } = redisConfig
-
-const isDEV = process.env.NODE_ENV === 'development'
-
-export function getClient(): Promise<RedisClient> {
-  return new Promise<RedisClient>((res, rej) => {
-    const client = redis.createClient(port, host)
-    res(client)
-
-    client.on('error', (err) => {
-      console.log(`Error ${err}`)
-      rej(err)
-    })
+export async function getClient() {
+  // 使用默认配置
+  const client = createClient()
+  client.on('error', (err) => {
+    console.log(`Error ${err}`)
   })
+  await client.connect()
+  return client
 }

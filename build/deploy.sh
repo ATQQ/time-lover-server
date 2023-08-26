@@ -13,6 +13,6 @@ ssh -p22 ${user}@${origin} "cd ${targetDir} && pnpm install"
 echo "开始-----build"
 ssh -p22 ${user}@${origin} "cd ${targetDir} && pnpm build"
 echo "开始-----重新启动"
-ssh -p22 ${user}@${origin} "pm2 restart lover-prod"
+ssh -p22 ${user}@${origin} "pm2 restart lover-server"
 echo "清理-----临时的文件"
 rm -rf $compressFile
