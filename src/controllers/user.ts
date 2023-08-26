@@ -30,7 +30,7 @@ export class UserController {
         }
         await this.userService.addUser(user)
       }
-      const token = this.userService.createToken(user)
+      const token = await this.userService.createToken(user)
       return {
         token,
       }

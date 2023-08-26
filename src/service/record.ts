@@ -24,14 +24,14 @@ export class RecordService {
 
   async getRecords(familyId: string) {
     // 展示最近500条记录，未来优化分页加载
-    const records = await queryRecordsByPage({
-      familyId,
-      userId: this.ctx.req.userInfo.userId,
-    }, 1, 500)
-    // const records = await queryRecords({
+    // const records = await queryRecordsByPage({
     //   familyId,
     //   userId: this.ctx.req.userInfo.userId,
-    // })
+    // }, 1, 500)
+    const records = await queryRecords({
+      familyId,
+      userId: this.ctx.req.userInfo.userId,
+    })
     records.forEach((r) => {
       delete r._id
       delete r.userId
