@@ -23,15 +23,29 @@ export class RecordService {
   }
 
   async getRecords(familyId: string) {
+    // 获取总条数
+    // const count = await this.getRecordsCount(familyId)
+    // const pageSize = 500
+    // const pageCount = 3
+    // const records = []
+    // console.log('sum', count, 'pageCount', pageCount)
+
+    // for (let i = 1; i <= pageCount; i++) {
+    //   const rs = await queryRecordsByPage({
+    //     familyId,
+    //     userId: this.ctx.req.userInfo.userId,
+    //   }, i, pageSize)
+    //   records.push(...rs)
+    // }
     // 展示最近500条记录，未来优化分页加载
-    // const records = await queryRecordsByPage({
-    //   familyId,
-    //   userId: this.ctx.req.userInfo.userId,
-    // }, 1, 500)
-    const records = await queryRecords({
+    const records = await queryRecordsByPage({
       familyId,
       userId: this.ctx.req.userInfo.userId,
-    })
+    }, 1, 500)
+    // const records = await queryRecords({
+    //   familyId,
+    //   userId: this.ctx.req.userInfo.userId,
+    // })
     records.forEach((r) => {
       delete r._id
       delete r.userId
