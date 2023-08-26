@@ -18,4 +18,5 @@ export interface Record {
   weight?: number
   date?: Date
   tips?: string
+  deleted?: boolean
 }

@@ -3,7 +3,14 @@ import type { Family } from './modal'
 import { findCollection, findCollectionCount, insertCollection, updateCollection } from '@/lib/dbConnect/mongodb'
 
 export function queryFamilies(query: Filter<Family>) {
-  return findCollection<Family>('family', query).then(v => v.filter(v => !v.deleted))
+  query.$and = (query.$and || []).concat([
+    {
+      deleted: {
+        $ne: true,
+      },
+    },
+  ])
+  return findCollection<Family>('family', query)
 }
 
 export function insertFamily(family: Family) {

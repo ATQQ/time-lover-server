@@ -8,6 +8,13 @@ import {
 } from '@/lib/dbConnect/mongodb'
 
 export function queryRecords(query: Filter<Record>) {
+  query.$and = (query.$and || []).concat([
+    {
+      deleted: {
+        $ne: true,
+      },
+    },
+  ])
   return findCollection<Record>('record', query)
 }
 
@@ -18,7 +25,7 @@ export function insertRecord(record: Record) {
 export function deleteRecord(record: Filter<Record>) {
   return updateCollection<Record>('record', record, {
     $set: {
-      userId: 'trash',
+      deleted: true,
     },
   })
 }
