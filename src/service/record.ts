@@ -1,6 +1,6 @@
 import type { Context } from 'flash-wolves'
 import { InjectCtx, Provide } from 'flash-wolves'
-import { deleteRecord, findRecordCount, insertRecord, queryRecords, updateRecord } from '@/db/recordDb'
+import { deleteRecord, findRecordCount, insertRecord, queryRecords, queryRecordsByPage, updateRecord } from '@/db/recordDb'
 import { getUniqueKey } from '@/utils/stringUtil'
 import type { Record } from '@/db/modal'
 
@@ -23,10 +23,15 @@ export class RecordService {
   }
 
   async getRecords(familyId: string) {
-    const records = await queryRecords({
+    // 展示最近500条记录，未来优化分页加载
+    const records = await queryRecordsByPage({
       familyId,
       userId: this.ctx.req.userInfo.userId,
-    })
+    }, 1, 500)
+    // const records = await queryRecords({
+    //   familyId,
+    //   userId: this.ctx.req.userInfo.userId,
+    // })
     records.forEach((r) => {
       delete r._id
       delete r.userId
@@ -38,11 +43,7 @@ export class RecordService {
   async getRecordsCount(familyId: string) {
     return await findRecordCount({
       familyId,
-      $nor: [
-        {
-          userId: 'trash'
-        }
-      ]
+      userId: this.ctx.req.userInfo.userId,
     })
   }
 

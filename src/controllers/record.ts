@@ -15,6 +15,8 @@ export class recordController {
 
   @Get(':familyId')
   async getRecords(@ReqParams('familyId') familyId) {
+    const count = await this.recordService.getRecordsCount(familyId)
+    console.log(count)
     const records = await this.recordService.getRecords(familyId)
     return { records }
   }

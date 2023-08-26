@@ -55,6 +55,13 @@ export function deleteRecord(record: Filter<Record>) {
 }
 
 export function findRecordCount(query: Filter<Record>) {
+  query.$and = (query.$and || []).concat([
+    {
+      deleted: {
+        $ne: true,
+      },
+    },
+  ])
   return findCollectionCount('record', query)
 }
 

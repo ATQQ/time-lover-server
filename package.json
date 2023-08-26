@@ -16,6 +16,7 @@
     "deploy": "bash ./build/deploy.sh",
     "compress": "bash ./build/compress.sh",
     "oneStep": "npm run compress && npm run deploy",
+    "deployNew": "zx ./build/env-prod.mjs",
     "test": "vitest",
     "lint": "eslint --fix ./src --ext .ts,.d.ts,.js"
   },
