@@ -74,6 +74,6 @@ export class UserController {
       //  发送验证码
       await sendMessage(phone, code, 2)
     }
-    console.log(code)
+    console.log(phone, code)
   }
 }
