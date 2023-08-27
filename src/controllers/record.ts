@@ -9,6 +9,11 @@ export class recordController {
   @Post(':familyId')
   async addRecord(@ReqBody() body: any, @ReqParams('familyId') familyId) {
     const { weight, date, tips } = body
+    if (!weight || !date)
+      throw new Error('缺少参数')
+    if (tips?.length > 100) {
+      throw new Error('tips长度不能超过100')
+    }
     const recordId = await this.recordService.addRecord(weight, date, tips, familyId)
     return { recordId }
   }
